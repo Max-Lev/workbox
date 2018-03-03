@@ -1,0 +1,17 @@
+importScripts('/node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js');
+
+const workbox = new WorkboxSW({
+    skipWaiting: true,
+    clientsClaim: true
+});
+
+self.addEventListener('push', (event) => {
+    const title = 'Get Started With Workbox';
+    const options = {
+        body: event.data.text()
+    };
+    event.waitUntil(self.registration.showNotification(title, options));
+});
+
+
+workbox.precache([]);
